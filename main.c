@@ -31,7 +31,7 @@ int main(int argc,char** argv){
 	while(!in.key[SDLK_ESCAPE])
 	{
 		UpdateEvents(&in);
-		Evolue(&in,carte,&perso,LARGEUR_TILE,HAUTEUR_TILE);
+		Evolue(&in,carte,&perso,&posblit,LARGEUR_TILE,HAUTEUR_TILE);
 		FocusScrollCenter(carte,&perso);
 		FocusScrollBox(carte,&perso,&limit);
 		AfficherMap(carte,screen);

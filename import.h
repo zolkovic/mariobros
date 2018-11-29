@@ -11,6 +11,9 @@
 #define MARIO_WALK_R_X 383
 #define MARIO_WALK_L_X 446
 #define MARIO_WALK_Y 77
+#define MARIO_JUMP_R_X 476
+#define MARIO_JUMP_L_X 497
+#define MARIO_JUMP_Y 35
 
 #define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
 #define ABS(X) ((((X)<0)?(-(X)):(X)))

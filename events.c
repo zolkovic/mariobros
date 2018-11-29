@@ -3,17 +3,18 @@
 typedef struct
 {
 	char key[SDLK_LAST];
-	int mousex,mousey;
-	int mousexrel,mouseyrel;
-	char mousebuttons[8];
+// 	int mousex,mousey;
+// 	int mousexrel,mouseyrel;
+// 	char mousebuttons[8];
+	int jump;
 	char quit;
 } Input;
 
 void UpdateEvents(Input* in)
 {
 	SDL_Event event;
-	in->mousebuttons[SDL_BUTTON_WHEELUP] = 0;
-	in->mousebuttons[SDL_BUTTON_WHEELDOWN] = 0;
+// 	in->mousebuttons[SDL_BUTTON_WHEELUP] = 0;
+// 	in->mousebuttons[SDL_BUTTON_WHEELDOWN] = 0;
 	while(SDL_PollEvent(&event))
 	{
 		switch (event.type)
