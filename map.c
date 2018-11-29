@@ -1,15 +1,9 @@
-#define _CRT_SECURE_NO_DEPRECATE   // pour visual C++ qui met des warning pour fopen et fscanf : aucun effet negatif pour les autres compilos.
-#include <string.h>
-#include <SDL/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#define CACHE_SIZE 5000
+#include "import.h"
 
 typedef struct
 {
 	SDL_Rect R;
 	int mur;
-	// tout ce que vous voulez...
 } TileProp;
 
 typedef struct
