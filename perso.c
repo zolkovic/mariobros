@@ -1,18 +1,18 @@
 #include "import.h"
 
 void RecupererVecteur(Input* in,int* vx,int* vy){
-	*vx = *vy = 0;
-	/*if (in->key[SDLK_UP])
-		*vy = -VELOCITY;
-	if (in->key[SDLK_DOWN])
-		*vy = VELOCITY;*/
+	*vx = 0;
 	*vy = VELOCITY;
-	if (in->key[SDLK_LEFT])
+	if (in->key[SDLK_LEFT]){
 		*vx = -VELOCITY;
-	if (in->key[SDLK_RIGHT])
+	}
+	if (in->key[SDLK_RIGHT]){
 		*vx = VELOCITY;
-	if (in->key[SDLK_SPACE])
+	}
+	if (in->key[SDLK_SPACE]){
 		*vy = -VELOCITY;
+		in->jump = 1;
+	}
 }
 
 int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy){
@@ -50,8 +50,16 @@ void Deplace(Map* carte,SDL_Rect* perso,int vx,int vy,int LARGEUR_TILE,int HAUTE
 	}
 }
 
-void Evolue(Input* in,Map* carte,SDL_Rect* perso,int LARGEUR_TILE,int HAUTEUR_TILE){
+void Evolue(Input* in,Map* carte,SDL_Rect* perso,SDL_Rect *posblit,int LARGEUR_TILE,int HAUTEUR_TILE){
 	int vx,vy;
+	SDL_Rect newsprite;
+	if (in->jump == 1){
+	  newsprite.x = MARIO_JUMP_R_X;
+	  newsprite.y = MARIO_JUMP_Y;
+	  newsprite.w = MARIO_WIDTH;
+	  newsprite.h = MARIO_HEIGHT;
+	  *posblit = newsprite;
+	}
 	RecupererVecteur(in,&vx,&vy);
 	Deplace(carte,perso,vx,vy,LARGEUR_TILE,HAUTEUR_TILE);
 }
