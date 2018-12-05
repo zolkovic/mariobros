@@ -4,11 +4,10 @@
 #include "perso.c"
 
 int main(int argc,char** argv){
-	SDL_Rect perso, posblit, limit;
-	SDL_Surface *screen, *mario;
 	Map* carte;
 	Input in;
-	int LARGEUR_TILE,HAUTEUR_TILE;
+	gameover = jump = left = right = move = landing = 0;
+	step = 1;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
@@ -24,20 +23,16 @@ int main(int argc,char** argv){
 	posblit.y = MARIO_WALK_Y;
 	posblit.w = MARIO_WIDTH;
 	posblit.h = MARIO_HEIGHT;
-	limit.x = 200;
-	limit.y = 150;
-	limit.w = 400;
-	limit.h = 300;
-	while(!in.key[SDLK_ESCAPE])
+	while(!gameover)
 	{
+		printf("%u",landing);
 		UpdateEvents(&in);
-		Evolue(&in,carte,&perso,&posblit,LARGEUR_TILE,HAUTEUR_TILE);
+		Evolue(&in,carte,&perso);
 		FocusScrollCenter(carte,&perso);
-		FocusScrollBox(carte,&perso,&limit);
 		AfficherMap(carte,screen);
-		AfficherPerso(&perso,&posblit,screen,mario,carte->xscroll,carte->yscroll);
+		AfficherPerso(&perso,screen,mario,carte->xscroll,carte->yscroll);
 		SDL_Flip(screen);
-		SDL_Delay(5);
+		SDL_Delay(10);
 	}
 	LibererMap(carte);
 	SDL_Quit();

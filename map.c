@@ -18,8 +18,7 @@ typedef struct
 	int largeur_fenetre,hauteur_fenetre;
 } Map;
 
-SDL_Surface* LoadImage32(const char* fichier_image)
-{
+SDL_Surface* LoadImage32(const char* fichier_image){
 	SDL_Surface* image_result;
 	SDL_Surface* image_ram = SDL_LoadBMP(fichier_image);	// charge l'image dans image_ram en RAM
 	if (image_ram==NULL)
@@ -34,8 +33,7 @@ SDL_Surface* LoadImage32(const char* fichier_image)
 	return image_result;
 }
 
-void ChargerMap_tileset(FILE* F,Map* m)
-{
+void ChargerMap_tileset(FILE* F,Map* m){
 	int numtile,i,j;
 	char buf[CACHE_SIZE];  // un buffer, petite mémoire cache
 	char buf2[CACHE_SIZE];  // un buffer, petite mémoire cache
@@ -62,8 +60,7 @@ void ChargerMap_tileset(FILE* F,Map* m)
 	}
 }
 
-void ChargerMap_level(FILE* F,Map* m)
-{
+void ChargerMap_level(FILE* F,Map* m){
 	int i,j;
 	char buf[CACHE_SIZE];  // un buffer, petite mémoire cache
 	fscanf(F,"%s",buf); // #level
@@ -89,8 +86,7 @@ void ChargerMap_level(FILE* F,Map* m)
 	}
 }
 
-Map* ChargerMap(const char* level,int largeur_fenetre,int hauteur_fenetre)
-{
+Map* ChargerMap(const char* level,int largeur_fenetre,int hauteur_fenetre){
 	FILE* F;
 	Map* m;
 	F = fopen(level,"r");
@@ -112,8 +108,7 @@ Map* ChargerMap(const char* level,int largeur_fenetre,int hauteur_fenetre)
 	return m;
 }
 
-int AfficherMap(Map* m,SDL_Surface* screen)
-{
+int AfficherMap(Map* m,SDL_Surface* screen){
 	int i,j;
 	SDL_Rect Rect_dest;
 	int numero_tile;
@@ -138,8 +133,7 @@ int AfficherMap(Map* m,SDL_Surface* screen)
 	return 0;
 }
 
-int LibererMap(Map* m)
-{
+int LibererMap(Map* m){
 	int i;
 	SDL_FreeSurface(m->tileset);
 	for(i=0;i<m->nbtiles_hauteur_monde;i++)
@@ -150,13 +144,13 @@ int LibererMap(Map* m)
 	return 0;
 }
 
-int CollisionDecor(Map* carte,SDL_Rect* perso)
-{
+int CollisionDecor(Map* carte,SDL_Rect* perso){
 	int xmin,xmax,ymin,ymax,i,j,indicetile;
 	xmin = perso->x / carte->LARGEUR_TILE;
 	ymin = perso->y / carte->HAUTEUR_TILE;
 	xmax = (perso->x + perso->w -1) / carte->LARGEUR_TILE;
 	ymax = (perso->y + perso->h -1) / carte->HAUTEUR_TILE;
+	/*Collisions bordures de la fenêtre*/
 	if (xmin<0 || ymin<0 || xmax>=carte->nbtiles_largeur_monde || ymax>=carte->nbtiles_hauteur_monde)
 		return 1;
 	for(i=xmin;i<=xmax;i++)
@@ -164,15 +158,23 @@ int CollisionDecor(Map* carte,SDL_Rect* perso)
 		for(j=ymin;j<=ymax;j++)
 		{
 			indicetile = carte->schema[i][j];
-			if (carte->props[indicetile].mur)
+			/*Collision avec un tile*/
+			if (carte->props[indicetile].mur){
+				/*Lorsque collision en dessous (Mario sur un sol)*/
+				if (j==ymax && landing){
+				    landing = 0;
+				    jump = 0;
+				    
+				}
 				return 1;
+			}
 		}
 	}
+	landing = 1;
 	return 0;
 }
 
-void ClampScroll(Map* m)
-{
+void ClampScroll(Map* m){
 	if (m->xscroll<0)
 		m->xscroll=0;
 	if (m->yscroll<0)
@@ -183,16 +185,14 @@ void ClampScroll(Map* m)
 		m->yscroll=m->nbtiles_hauteur_monde*m->HAUTEUR_TILE-m->hauteur_fenetre-1;
 }
 
-int FocusScrollCenter(Map* carte,SDL_Rect* perso)
-{
+int FocusScrollCenter(Map* carte,SDL_Rect* perso){
 	carte->xscroll = perso->x + perso->w/2 - carte->largeur_fenetre/2;
 	carte->yscroll = perso->y + perso->h/2 - carte->hauteur_fenetre/2;
 	ClampScroll(carte);
 	return 0;
 }
 
-int FocusScrollBox(Map* carte,SDL_Rect* perso,SDL_Rect* limit)
-{
+int FocusScrollBox(Map* carte,SDL_Rect* perso,SDL_Rect* limit){
 	int cxperso,cyperso,xlimmin,xlimmax,ylimmin,ylimmax;
 	cxperso = perso->x + perso->w/2;
 	cyperso = perso->y + perso->h/2;

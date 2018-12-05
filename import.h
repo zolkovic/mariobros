@@ -17,3 +17,12 @@
 
 #define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
 #define ABS(X) ((((X)<0)?(-(X)):(X)))
+
+/*************Variables globales*************/
+int LARGEUR_TILE,HAUTEUR_TILE, gameover;
+/*Variables dédiées au défilement de sprites*/
+int landing, jump, right, left, step, reset, move;
+/**************Rectangles SDL****************/
+SDL_Rect perso, posblit;
+/***************Surfaces SDL*****************/
+SDL_Surface *screen, *mario;
