@@ -47,7 +47,9 @@ void UpdateEvents(Input* in)
 				gameover = 1;
 				break;
 			case SDLK_SPACE:
-				jump = 1;
+				//condition pour éviter de pouvoir sauter dans les airs
+				if (perso.y > saveY-1 && !jump)
+					jump = 1;
 				break;
 			case SDLK_LEFT:
 				right = 0;

@@ -161,10 +161,10 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 			/*Collision avec un tile*/
 			if (carte->props[indicetile].mur){
 				/*Lorsque collision en dessous (Mario sur un sol)*/
+				jump = 0;
 				if (j==ymax && fly){
 				    fly = 0;
-				    jump = 0;
-				    
+// 				    jump = 0;
 				}
 				return 1;
 			}

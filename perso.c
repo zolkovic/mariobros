@@ -2,13 +2,17 @@
 
 void RecupererVecteur(Input* in,int* vx,int* vy){
 	*vx = 0;
+	//gravité qui permet à Mario de tomber s'il doit tomber
 	*vy = VELOCITY;
 	if (move != 0){
 		*vx = move;
 	}
-	if (jump){
-		*vy = -VELOCITY;
-	}
+	if (jump && perso.y > saveY-JUMP_HEIGHT)
+		*vy = -VELOCITY_JUMP;
+	else
+		jump = 0;
+	if (perso.y >= GROUND_Y)
+		gameover = 1;
 }
 
 int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy){
@@ -50,6 +54,12 @@ void Evolue(Input* in,Map* carte,SDL_Rect* perso){
 	int vx,vy;
 	RecupererVecteur(in,&vx,&vy);
 	Deplace(carte,perso,vx,vy);
+	/*Sauvegarde de la position Y au cas où Mario veuille sauter*/
+	if (!jump && !fly)
+		saveY=perso->y;
+	/*Si Mario est en chute on met un save hors de map pour éviter les sauts dans le vide*/
+	else if(!jump && fly)
+		saveY = 9999;
 	/*Quand Mario saute vers la DROITE*/
 	if (fly && right){
 	  step = 1;

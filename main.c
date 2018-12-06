@@ -15,8 +15,8 @@ int main(int argc,char** argv){
 	screen = SDL_SetVideoMode(LARGEUR_FENETRE,HAUTEUR_FENETRE,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 	carte = ChargerMap("level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
 	mario = IMG_Load("./img/mario-3.png");
-	perso.x = 150;
-	perso.y = 150;
+	perso.x = 30;
+	perso.y = saveY = 600;
 	perso.w = 24;
 	perso.h = 32;
 	posblit.x = MARIO_WALK_R_X;
@@ -25,7 +25,6 @@ int main(int argc,char** argv){
 	posblit.h = MARIO_HEIGHT;
 	while(!gameover)
 	{
-		printf("%u",fly);
 		UpdateEvents(&in);
 		Evolue(&in,carte,&perso);
 		FocusScrollCenter(carte,&perso);
