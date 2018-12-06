@@ -1,6 +1,10 @@
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL2/SDL_image.h>
+// #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
 
 #define CACHE_SIZE 5000
 #define LARGEUR_FENETRE 800
@@ -26,6 +30,6 @@ int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY;
 /*Variables dédiées au défilement de sprites*/
 int fly, jump, right, left, step, reset, move;
 /**************Rectangles SDL****************/
-SDL_Rect perso, posblit;
+SDL_Rect perso, posblit, postexte;
 /***************Surfaces SDL*****************/
-SDL_Surface *screen, *mario;
+SDL_Surface *screen, *mario, *texte;
