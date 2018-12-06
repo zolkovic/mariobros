@@ -6,7 +6,7 @@
 int main(int argc,char** argv){
 	Map* carte;
 	Input in;
-	gameover = jump = left = right = move = landing = 0;
+	gameover = jump = left = right = move = fly = 0;
 	step = 1;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
@@ -25,7 +25,7 @@ int main(int argc,char** argv){
 	posblit.h = MARIO_HEIGHT;
 	while(!gameover)
 	{
-		printf("%u",landing);
+		printf("%u",fly);
 		UpdateEvents(&in);
 		Evolue(&in,carte,&perso);
 		FocusScrollCenter(carte,&perso);
