@@ -21,7 +21,7 @@
 /*************Variables globales*************/
 int LARGEUR_TILE,HAUTEUR_TILE, gameover;
 /*Variables dédiées au défilement de sprites*/
-int landing, jump, right, left, step, reset, move;
+int fly, jump, right, left, step, reset, move;
 /**************Rectangles SDL****************/
 SDL_Rect perso, posblit;
 /***************Surfaces SDL*****************/

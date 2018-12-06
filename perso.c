@@ -3,11 +3,8 @@
 void RecupererVecteur(Input* in,int* vx,int* vy){
 	*vx = 0;
 	*vy = VELOCITY;
-	if (move == -1){
-		*vx = -VELOCITY;
-	}
-	if (move == 1){
-		*vx = VELOCITY;
+	if (move != 0){
+		*vx = move;
 	}
 	if (jump){
 		*vy = -VELOCITY;
@@ -54,31 +51,31 @@ void Evolue(Input* in,Map* carte,SDL_Rect* perso){
 	RecupererVecteur(in,&vx,&vy);
 	Deplace(carte,perso,vx,vy);
 	/*Quand Mario saute vers la DROITE*/
-	if (landing && right){
+	if (fly && right){
 	  step = 1;
 	  posblit.x = MARIO_JUMP_R_X;
 	  posblit.y = MARIO_JUMP_Y;
 	}
 	/*Quand Mario saute vers la GAUCHE*/
-	if (landing && left){
+	if (fly && left){
 	  step = 4;
 	  posblit.x = MARIO_JUMP_L_X;
 	  posblit.y = MARIO_JUMP_Y;
 	}
 	/*Si Mario n'est pas en l'air*/
-	if (!landing)
+	if (!fly)
 	{
 	  /*Quand Mario marche vers la DROITE*/
-	  if (move==1){
+	  if (move==VELOCITY){
 	    if (step != 1 && step != 2 && step != 3){
-	      posblit.x = MARIO_WALK_R_X;
-	      posblit.y = MARIO_WALK_Y;
 	      step = 1;
 	    }
 	    if (step == 3){
 	      reset = 1;
 	    }
 	    if (step == 1){
+	      posblit.x = MARIO_WALK_R_X;
+	      posblit.y = MARIO_WALK_Y;
 	      reset = 0;
 	    }
 	    if (reset == 0){
@@ -91,17 +88,17 @@ void Evolue(Input* in,Map* carte,SDL_Rect* perso){
 	    }
 	  }
 	  /*Quand Mario marche vers la GAUCHE*/
-	  else if (move==-1){
+	  else if (move==-VELOCITY){
 	    posblit.y = MARIO_WALK_Y;
 	    if (step != 4 && step != 5 && step != 6){
-	      posblit.x = MARIO_WALK_L_X;
-	      posblit.y = MARIO_WALK_Y;
 	      step = 4;
 	    }
 	    if (step == 6){
 	      reset = 1;
 	    }
 	    if (step == 4){
+	      posblit.x = MARIO_WALK_L_X;
+	      posblit.y = MARIO_WALK_Y;
 	      reset = 0;
 	    }
 	    if (reset == 0){
@@ -127,17 +124,6 @@ void Evolue(Input* in,Map* carte,SDL_Rect* perso){
 	      }
 	  }
 	}
-	/*Quand Mario ratterit*/
-// 	if (landing==1){
-// 	  landing = 0;
-// 	  posblit.y = MARIO_WALK_Y;
-// 	  if (left){
-// 	    posblit.x = MARIO_WALK_L_X;
-// 	  }else if (right){
-// 	    posblit.x = MARIO_WALK_R_X;
-// 	  }
-// 	}
-
 }
 
 void AfficherPerso(SDL_Rect *perso,SDL_Surface *screen,SDL_Surface *mario,int xscroll,int yscroll){

@@ -21,11 +21,20 @@ void UpdateEvents(Input* in)
 		case SDL_KEYUP:
 		{
 			in->key[event.key.keysym.sym]=0;
-			if (event.key.keysym.sym==SDLK_RIGHT || event.key.keysym.sym==SDLK_LEFT){
-			  move = 0;
-			}
-			if (event.key.keysym.sym==SDLK_SPACE){
-			  jump = 0;
+			switch(event.key.keysym.sym)
+			{
+			case SDLK_SPACE:
+				jump = 0;
+				break;
+			case SDLK_RIGHT:
+				//condition if pour pas que Mario s'arrête si on enchaine des droite/gauche
+				if (move == VELOCITY)
+					move = 0;
+				break;
+			case SDLK_LEFT:
+				//condition if pour pas que Mario s'arrête si on enchaine des droite/gauche
+				if (move == -VELOCITY)
+					move = 0;
 			}
 		}
 		break;
@@ -43,12 +52,12 @@ void UpdateEvents(Input* in)
 			case SDLK_LEFT:
 				right = 0;
 				left = 1;
-				move = -1;
+				move = -VELOCITY;
 				break;
 			case SDLK_RIGHT:
 				left = 0;
 				right = 1;
-				move = 1;
+				move = VELOCITY;
 				break;
 			}
 			break;
