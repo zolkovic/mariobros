@@ -26,7 +26,7 @@
 #define ABS(X) ((((X)<0)?(-(X)):(X)))
 
 /*************Variables globales*************/
-int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY;
+int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score;
 /*Variables dédiées au défilement de sprites*/
 int fly, jump, right, left, step, reset, move;
 /**************Rectangles SDL****************/
