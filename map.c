@@ -164,7 +164,6 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 				jump = 0;
 				if (j==ymax && fly){
 				    fly = 0;
-// 				    jump = 0;
 				}
 				return 1;
 			}

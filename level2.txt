@@ -86,7 +86,7 @@ tile81: ciel
 tile82: ciel
 tile83: mur
 tile84: mur
-tile85: mur
+tile85: ciel
 tile86: ciel
 tile87: ciel
 #level

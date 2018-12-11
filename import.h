@@ -9,7 +9,7 @@
 #define CACHE_SIZE 5000
 #define LARGEUR_FENETRE 800
 #define HAUTEUR_FENETRE 600
-#define GROUND_Y 768
+#define GROUND 600
 #define VELOCITY 2
 #define VELOCITY_JUMP 3
 #define MARIO_HEIGHT 30

@@ -11,7 +11,7 @@ void RecupererVecteur(Input* in,int* vx,int* vy){
 		*vy = -VELOCITY_JUMP;
 	else
 		jump = 0;
-	if (perso.y >= GROUND_Y)
+	if (perso.y >= GROUND)
 		gameover = 1;
 }
 
