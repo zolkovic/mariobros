@@ -6,6 +6,7 @@ typedef struct
 {
 	SDL_Rect R;
 	int mur;
+	int bloc;
 } TileProp;
 
 typedef struct

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-// #include <SDL/SDL_mixer.h>
+#include "dll/include/SDL/SDL_mixer.h"
 #include <SDL/SDL_ttf.h>
 
 #define CACHE_SIZE 5000
@@ -21,9 +21,6 @@
 #define MARIO_JUMP_L_X 497
 #define MARIO_JUMP_Y 35
 #define JUMP_HEIGHT 120
-
-#define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
-#define ABS(X) ((((X)<0)?(-(X)):(X)))
 
 /*************Variables globales*************/
 int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score;

@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     TTF_Init();
 
     ecran = SDL_SetVideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    SDL_WM_SetCaption("Test Menu", NULL);
+    SDL_WM_SetCaption("Oiram Sorb Beta", NULL);
 
     fond = IMG_Load("./img/menu/fond.png");
     chrono = IMG_Load("./img/menu/xchrono.png");
@@ -38,11 +38,17 @@ int main(int argc, char *argv[])
     /* Écriture du texte en mode Solid*/
     temps = TTF_RenderText_Solid(policeMenu, time, couleurBlanche);
     /* Écriture du texte en mode Blended*/
-    titre = TTF_RenderText_Blended(policeTitre, "New Super Mega Mario Bros", couleurNoire);
+    titre = TTF_RenderText_Blended(policeTitre, "New Super Oiram Sorb", couleurNoire);
     jouer = TTF_RenderText_Blended(policeMenu, "Jouer", couleurNoire);
     options = TTF_RenderText_Blended(policeMenu, "Options", couleurNoire);
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
     highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
+/*    
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
+    Mix_Music* musique;
+    musique = Mix_LoadMUS("./sons/mario-bros-song.mp3");
+    Mix_PlayMusic(musique, -1);
+    */
     while (continuer)
     {
         SDL_PollEvent(&event);
@@ -54,6 +60,8 @@ int main(int argc, char *argv[])
             case SDL_MOUSEBUTTONDOWN:
                 if(event.button.x >= 350  && event.button.x <= (350+jouer->w) && event.button.y >= 248 && event.button.y <= (248+jouer->h)){
                     playGame();
+		    event.button.x += 20;
+		    event.button.y += 20;
                 }
             case SDL_MOUSEMOTION:
                 if(event.motion.x >= 350  && event.motion.x <= (350+jouer->w) && event.motion.y >= 248 && event.motion.y <= (248+jouer->h))
@@ -67,7 +75,7 @@ int main(int argc, char *argv[])
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, ecran, &position); /* Blit du texte */ 
                         SDL_Flip(ecran);
-                        SDL_Delay(100);
+                        SDL_Delay(5);
                     }
                 if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h))
                     {
@@ -80,7 +88,7 @@ int main(int argc, char *argv[])
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, ecran, &position); /* Blit du texte */ 
                         SDL_Flip(ecran);
-                        SDL_Delay(100);
+                        SDL_Delay(5);
                     }
                 if(event.motion.x >= 330  && event.motion.x <= (330+credits->w) && event.motion.y >= 348 && event.motion.y <= (348+credits->h))
                     {
@@ -88,17 +96,15 @@ int main(int argc, char *argv[])
                         position.x = 330;
                         position.y = 348;
                         SDL_BlitSurface(texteMenu, NULL, ecran, &position); /* Blit du texte */
-                        texteMenu = TTF_RenderText_Blended(policeInfo,"2018\nDUFOUR 'Zolkovic' Christophe - BEN SAID 'Thundder' Walid", couleurNoire);
+                        texteMenu = TTF_RenderText_Blended(policeInfo,"2018 - DUFOUR 'Zolkovic' Christophe - BEN SAID 'Thundder' Walid", couleurNoire);
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, ecran, &position); /* Blit du texte */ 
                         SDL_Flip(ecran);
-                        SDL_Delay(100);
+                        SDL_Delay(5);
                     }
         }      
 
-        //SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
-        
         tempsActuel = SDL_GetTicks();
         if (tempsActuel - tempsPrecedent >= 1000) /* Si 1000 ms au moins se sont écoulées */
         {
@@ -147,7 +153,10 @@ int main(int argc, char *argv[])
     TTF_CloseFont(policeMenu);
     TTF_CloseFont(policeInfo);
     TTF_Quit();
-
+/*    
+    Mix_FreeMusic(musique); 
+    Mix_CloseAudio();
+    */
     SDL_FreeSurface(titre);
     SDL_FreeSurface(jouer);
     SDL_FreeSurface(options);
