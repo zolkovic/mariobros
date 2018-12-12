@@ -37,6 +37,7 @@ void ViePerso(){
 	SDL_BlitSurface(vies,NULL,screen,&positionsurecran);
 	if (vie == 0){
 		gameover = 1;
+        compteur = 0;
 	}
 }
 
