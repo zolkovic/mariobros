@@ -6,7 +6,7 @@
 void playGame(){
 	Map* carte;
 	Input in;
-	gameover = jump = left = right = move = fly = 0;	step = 1;	vie = 3;	score = 00000;
+	gameover = jump = left = right = move = fly = i = 0;	step = 1;	vie = 3;	score = 00000;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));

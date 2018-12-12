@@ -4,8 +4,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include "jeu.c"
-#define LARGEUR_FENETRE 800
-#define HAUTEUR_FENETRE 600
+#include "import.h"
 
 
 int main(int argc, char *argv[])
@@ -55,14 +54,19 @@ int main(int argc, char *argv[])
         switch(event.type)
         {
             case SDL_QUIT:
-                continuer = 0;
-                break;
+		  continuer = 0;
+		  break;
+	    case SDL_KEYDOWN:
+		if (event.key.keysym.sym==SDLK_ESCAPE){
+			continuer = 0;
+			break;
+		}
             case SDL_MOUSEBUTTONDOWN:
-                if(event.button.x >= 350  && event.button.x <= (350+jouer->w) && event.button.y >= 248 && event.button.y <= (248+jouer->h)){
-                    playGame();
-		    event.button.x += 20;
-		    event.button.y += 20;
-                }
+		  if(event.button.x >= 350  && event.button.x <= (350+jouer->w) && event.button.y >= 248 && event.button.y <= (248+jouer->h)){
+			playGame();
+			event.button.x += 20;
+			event.button.y += 20;
+		  }
             case SDL_MOUSEMOTION:
                 if(event.motion.x >= 350  && event.motion.x <= (350+jouer->w) && event.motion.y >= 248 && event.motion.y <= (248+jouer->h))
                     {
