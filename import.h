@@ -24,9 +24,9 @@
 
 #define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
 #define ABS(X) ((((X)<0)?(-(X)):(X)))
-
+void AfficherTemps(int*, int*);
 /*************Variables globales*************/
-int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i;
+int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i, compteur;
 /*Variables dédiées au défilement de sprites*/
 int fly, jump, right, left, step, reset, move;
 /**************Rectangles SDL****************/
