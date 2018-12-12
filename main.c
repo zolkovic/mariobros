@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     
     /* Écriture du texte en mode Blended*/
     titre = TTF_RenderText_Blended(policeTitre, "New Super Oiram Sorb", couleurNoire);
-    jouer = TTF_RenderText_Blended(policeMenu, "Jouer", couleurNoire);
+    jouer = TTF_RenderText_Blended(policeMenu, "Nouvelle partie", couleurNoire);
     options = TTF_RenderText_Blended(policeMenu, "Options", couleurNoire);
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
     highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
@@ -57,16 +57,16 @@ int main(int argc, char *argv[])
             case SDL_MOUSEBUTTONDOWN:
 		  if(event.button.x >= 350  && event.button.x <= (350+jouer->w) && event.button.y >= 248 && event.button.y <= (248+jouer->h)){
             compteur = 0;
-			playGame();
+			playGame(1, 1, 1);
 			event.button.x += 20;
 			event.button.y += 20;
 		  }
             case SDL_MOUSEMOTION:
                 if(event.motion.x >= 350  && event.motion.x <= (350+jouer->w) && event.motion.y >= 248 && event.motion.y <= (248+jouer->h))
                     {
-                        texteMenu = TTF_RenderText_Blended(policeMenu,"Jouer",couleurRouge);
-                        position.x = 350;
-                        position.y = 248;
+                        texteMenu = TTF_RenderText_Blended(policeMenu,"Nouvelle Partie",couleurRouge);
+                        position.x = (LARGEUR_FENETRE / 2) - (jouer->w / 2);
+                        position.y = (HAUTEUR_FENETRE / 2) - 2*jouer->h;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
                         texteMenu = TTF_RenderText_Blended(policeInfo,"Cliquez pour lancer le jeu", couleurNoire);
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);

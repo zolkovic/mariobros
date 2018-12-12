@@ -3,16 +3,22 @@
 #include "events.c"
 #include "perso.c"
 
-void playGame(){
+void playGame(int me, int monde, int level){
 	Map* carte;
 	Input in;
 	gameover = jump = left = right = move = fly = i = 0;	step = 1;	vie = 3;	score = 00000;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
-	
-	carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
-	mario = IMG_Load("./img/mario-3.png");
+	if (monde==1){
+        if (level==1)
+            carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+        //le reste des maps ici...
+    }
+    if (me==1)
+        mario = IMG_Load("./img/mario-3.png");
+    if (me==2)
+        mario = IMG_Load("./img/luigi-3.png");
 	perso.x = respawnX = 30;
 	perso.y = saveY = respawnY = 535;
 	perso.w = 24;
