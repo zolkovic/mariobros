@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     SDL_Color couleurNoire = {0, 0, 0}, couleurBlanche = {255, 255, 255}, couleurRouge = {255, 0, 0};
     int continuer = 1;
     
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
 
     screen = SDL_SetVideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
     options = TTF_RenderText_Blended(policeMenu, "Options", couleurNoire);
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
     highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
-/*    
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
+    
     Mix_Music* musique;
-    musique = Mix_LoadMUS("./sons/mario-bros-song.mp3");
-    Mix_PlayMusic(musique, -1);
-    */
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+    musique = Mix_LoadMUS("./sons/hurry-up.wav");
+    Mix_PlayMusic(musique, 1);
+    
     while (continuer)
     {
         SDL_PollEvent(&event);
@@ -163,10 +163,10 @@ int main(int argc, char *argv[])
     TTF_CloseFont(policeMenu);
     TTF_CloseFont(policeInfo);
     TTF_Quit();
-/*    
+    
     Mix_FreeMusic(musique); 
     Mix_CloseAudio();
-    */
+    
     SDL_FreeSurface(titre);
     SDL_FreeSurface(new);
     SDL_FreeSurface(options);

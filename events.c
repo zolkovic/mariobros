@@ -10,6 +10,9 @@ typedef struct
 
 void UpdateEvents(Input* in)
 {
+    Mix_Music* m_jump;
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+    m_jump = Mix_LoadMUS("./sons/saut.wav");
 	SDL_Event event;
 	while(SDL_PollEvent(&event))
 	{
@@ -50,6 +53,7 @@ void UpdateEvents(Input* in)
 				//condition pour éviter de pouvoir sauter dans les airs
 				if (perso.y > saveY-1 && !jump)
 					jump = 1;
+                    Mix_PlayMusic(m_jump, 1);
 				break;
 			case SDLK_LEFT:
 				right = 0;

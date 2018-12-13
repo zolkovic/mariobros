@@ -14,10 +14,10 @@ void RecupererVecteur(Input* in,int* vx,int* vy){
 	if (perso.y >= GROUND){
 		vie -= 1;
 		if (vie != 0){
-			perso.x = respawnX;
+			perso.x = respawnX-10;
 			perso.y = respawnY;
 		}
-		SDL_Delay(1000);
+		SDL_Delay(100);
 	}
 }
 

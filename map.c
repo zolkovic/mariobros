@@ -167,6 +167,10 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 				if (carte->schema[i+1][16] != 292){
 					score += (int)(GROUND-perso->y)/2 + compteur/20;
 					perso->x = (i+1)*32 - MARIO_WIDTH;
+                    Mix_Music* m_fin;
+                    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+                    m_fin = Mix_LoadMUS("./sons/niveau-termine.wav");
+                    Mix_PlayMusic(m_fin, 1);
 					if (cmp == 4){
 						cmp = 0;
 						k = 8;

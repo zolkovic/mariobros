@@ -42,6 +42,7 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	SDL_Color couleurBlanche = {255, 255, 255};
 	/* Écriture du texte en mode Solid*/
 	temps = TTF_RenderText_Solid(policeMenu, time, couleurBlanche);
+    
 	while(!gameover)
 	{
 		UpdateEvents(&in);
@@ -51,9 +52,11 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 		AfficherPerso(&perso,screen,mario,carte->xscroll,carte->yscroll);
 		TableauDeBord(screen, me);
 		tempsActuel = SDL_GetTicks();
-		if (tempsActuel - tempsPrecedent >= 1000) /* Si 1000 ms au moins se sont écoulées */
-		{
-		    *compteur -= 1; /* On rajoute 1s au compteur */
+        if (*compteur == 0){
+            gameover = 1;
+        }
+		if (tempsActuel - tempsPrecedent >= 1000){ /* Si 1000 ms au moins se sont écoulées */
+            *compteur -= 1; /* On rajoute 1s au compteur */
 		    sprintf(time, "Timer : %d", *compteur); /* On écrit dans la chaîne "temps" le nouveau temps */
 		    SDL_FreeSurface(temps); /* On supprime la surface précédente */
 		    temps = TTF_RenderText_Solid(policeMenu, time, couleurBlanche); /* On écrit la chaîne temps dans la SDL_Surface */
