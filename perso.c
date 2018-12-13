@@ -40,44 +40,44 @@ void ViePerso(){
 	}
 }
 
-int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy){
+int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy,int compteur){
 	SDL_Rect test;
 	test = *perso;
 	test.x+=vx;
 	test.y+=vy;
-	if (CollisionDecor(carte,&test)==0){
+	if (CollisionDecor(carte,&test,compteur)==0){
 		*perso = test;
 		return 1;
 	}
 	return 0;
 }
 
-void Deplace(Map* carte,SDL_Rect* perso,int vx,int vy){
+void Deplace(Map* carte,SDL_Rect* perso,int vx,int vy, int compteur){
 	int i;
 	if (vx>=LARGEUR_TILE || vy>=HAUTEUR_TILE)
 	{
-		Deplace(carte,perso,vx/2,vy/2);
-		Deplace(carte,perso,vx-vx/2,vy-vy/2);
+		Deplace(carte,perso,vx/2,vy/2,compteur);
+		Deplace(carte,perso,vx-vx/2,vy-vy/2,compteur);
 		return;
 	}
-	if (EssaiDeplacement(carte,perso,vx,vy)==1)
+	if (EssaiDeplacement(carte,perso,vx,vy,compteur)==1)
 		return;
 	for(i=0;i<ABS(vx);i++)
 	{
-		if (EssaiDeplacement(carte,perso,SGN(vx),0)==0)
+		if (EssaiDeplacement(carte,perso,SGN(vx),0,compteur)==0)
 			break;
 	}
 	for(i=0;i<ABS(vy);i++)
 	{
-		if (EssaiDeplacement(carte,perso,0,SGN(vy))==0)
+		if (EssaiDeplacement(carte,perso,0,SGN(vy),compteur)==0)
 			break;			
 	}
 }
 
-void Evolue(Input* in,Map* carte,SDL_Rect* perso){
+void Evolue(Input* in,Map* carte,SDL_Rect* perso,int compteur){
 	int vx,vy;
 	RecupererVecteur(in,&vx,&vy);
-	Deplace(carte,perso,vx,vy);
+	Deplace(carte,perso,vx,vy, compteur);
 	SDL_Delay(30);
 	/*Sauvegarde de la position Y au cas où Mario veuille sauter*/
 	if (!jump && !fly){

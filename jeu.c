@@ -45,7 +45,7 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	while(!gameover)
 	{
 		UpdateEvents(&in);
-		Evolue(&in,carte,&perso);
+		Evolue(&in,carte,&perso, *compteur);
 		FocusScrollCenter(carte,&perso);
 		AfficherMap(carte,screen);
 		AfficherPerso(&perso,screen,mario,carte->xscroll,carte->yscroll);
