@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 		if(event.button.x >= 252  && event.button.x <= (252+new->w) && event.button.y >= 204 && event.button.y <= (204+new->h)){
 			if (me !=1 && me != 2)
 				Options(&me);
-			compteur = 0;
+			compteur = 300;
 			monde = level = 1;
 			respawnX = 6000; 
 			respawnY = 200;

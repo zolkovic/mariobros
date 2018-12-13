@@ -5,3 +5,10 @@
 - blocs
 - objets
 - musique
+
+highscore
+dernier score
+dernier X et Y de mario
+vies
+monde
+level

@@ -150,6 +150,7 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 	int xmin,xmax,ymin,ymax,i,j,indicetile, k;
 	static int compteur = 0;
 	static int l = 0;
+	static int once = 0;
 	xmin = perso->x / carte->LARGEUR_TILE;
 	ymin = perso->y / carte->HAUTEUR_TILE;
 	xmax = (perso->x + perso->w -1) / carte->LARGEUR_TILE;
@@ -166,7 +167,6 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 				/*Défilement du drapeau à la fin*/
 				if (carte->schema[i+1][16] != 292){
 					perso->x = (i+1)*32 - MARIO_WIDTH;
-					score += (int)perso->y/10;
 					if (compteur == 4){
 						compteur = 0;
 						k = 8;
@@ -178,18 +178,23 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 					}else{
 						compteur += 1;
 					}
-					
+				}else{
+					if(once == 0){
+						score += GROUND-(int)perso->y/10 + compteur;
+						once = 1;
+					}
 				}
 			}
 			else if (indicetile == 223 || indicetile == 224){
 				/*Arrivée à la porte de fin pour niveau suivant*/
-// 				perso->x = i*32
-// 				if (compteur == 5){
-// 					compteur = 0;
-// 					
-// 				}else{
-// 					compteur += 1;
-// 				}
+				perso->x = i*32;
+				if (compteur == 5){
+					compteur = 0;
+					perso->x += l;
+					l += 1;
+				}else{
+					compteur += 1;
+				}
 			}
 			//printf("indicetile = %u\n",indicetile);
 			/*Collision avec un tile*/
