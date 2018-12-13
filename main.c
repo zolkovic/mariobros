@@ -1,15 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
 #include "jeu.c"
+#include "options.c"
 #include "import.h"
 
 
 int main(int argc, char *argv[])
 {
-    SDL_Surface *titre = NULL, *jouer = NULL, *options = NULL, *credits = NULL, *highscore = NULL, *fond = NULL, *texteMenu = NULL;
+    SDL_Surface *titre, *new, *load, *options, *credits, *highscore, *fond, *texteMenu;
     SDL_Rect position;
     SDL_Event event;
     TTF_Font *policeTitre = NULL, *policeMenu = NULL, *policeInfo = NULL;
@@ -31,7 +27,8 @@ int main(int argc, char *argv[])
     
     /* Écriture du texte en mode Blended*/
     titre = TTF_RenderText_Blended(policeTitre, "New Super Oiram Sorb", couleurNoire);
-    jouer = TTF_RenderText_Blended(policeMenu, "Nouvelle partie", couleurNoire);
+    new = TTF_RenderText_Blended(policeMenu, "Nouvelle partie", couleurNoire);
+    load = TTF_RenderText_Blended(policeMenu, "Charger partie", couleurNoire);
     options = TTF_RenderText_Blended(policeMenu, "Options", couleurNoire);
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
     highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
@@ -55,27 +52,38 @@ int main(int argc, char *argv[])
 			break;
 		}
             case SDL_MOUSEBUTTONDOWN:
-		  if(event.button.x >= 350  && event.button.x <= (350+jouer->w) && event.button.y >= 248 && event.button.y <= (248+jouer->h)){
-            compteur = 0;
-			playGame(1, 1, 1);
-			event.button.x += 20;
-			event.button.y += 20;
+		  if(event.button.x >= 252  && event.button.x <= (252+new->w) && event.button.y >= 204 && event.button.y <= (204+new->h)){
+			compteur = 0;
+			me = monde = level = 1;
+			respawnX = 30;
+			respawnY = 535;
+			vie = 3;
+			playGame(me, monde, level, &compteur, vie, respawnX, respawnY);
+			event.button.x = 0;
+			event.button.y = 0;
+		  } 
+		  else if(event.button.x >= 262  && event.button.x <= (262+load->w) && event.button.y >= 253 && event.button.y <= (253+load->h) && compteur != 0){
+			playGame(me, monde, level, &compteur, vie, respawnX, respawnY);
+			event.button.x = 0;
+			event.button.y = 0;
+		  } 
+		  else if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h)){
+			Options(&me);
 		  }
             case SDL_MOUSEMOTION:
-                if(event.motion.x >= 350  && event.motion.x <= (350+jouer->w) && event.motion.y >= 248 && event.motion.y <= (248+jouer->h))
+                if(event.motion.x >= 252  && event.motion.x <= (252+new->w) && event.motion.y >= 204 && event.motion.y <= (204+new->h))
                     {
                         texteMenu = TTF_RenderText_Blended(policeMenu,"Nouvelle Partie",couleurRouge);
-                        position.x = (LARGEUR_FENETRE / 2) - (jouer->w / 2);
-                        position.y = (HAUTEUR_FENETRE / 2) - 2*jouer->h;
+			position.x = (LARGEUR_FENETRE / 2) - (new->w / 2);
+			position.y = (HAUTEUR_FENETRE / 2) - 2*new->h - 50;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
-                        texteMenu = TTF_RenderText_Blended(policeInfo,"Cliquez pour lancer le jeu", couleurNoire);
+                        texteMenu = TTF_RenderText_Blended(policeInfo,"Cliquez pour lancer une nouvelle partie", couleurNoire);
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
                         SDL_Flip(screen);
-                        SDL_Delay(5);
                     }
-                if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h))
+                else if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h))
                     {
                         texteMenu = TTF_RenderText_Blended(policeMenu,"Options",couleurRouge);
                         position.x = 330;
@@ -86,9 +94,8 @@ int main(int argc, char *argv[])
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
                         SDL_Flip(screen);
-                        SDL_Delay(5);
                     }
-                if(event.motion.x >= 330  && event.motion.x <= (330+credits->w) && event.motion.y >= 348 && event.motion.y <= (348+credits->h))
+                else if(event.motion.x >= 330  && event.motion.x <= (330+credits->w) && event.motion.y >= 348 && event.motion.y <= (348+credits->h))
                     {
                         texteMenu = TTF_RenderText_Blended(policeMenu,"Credits",couleurRouge);
                         position.x = 330;
@@ -99,7 +106,22 @@ int main(int argc, char *argv[])
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
                         SDL_Flip(screen);
-                        SDL_Delay(5);
+                    }
+                else if(event.motion.x >= 262  && event.motion.x <= (262+load->w) && event.motion.y >= 253 && event.motion.y <= (253+load->h))
+                    {
+                        texteMenu = TTF_RenderText_Blended(policeMenu,"Charger Partie",couleurRouge);
+                        position.x = (LARGEUR_FENETRE / 2) - (load->w / 2);
+                        position.y = (HAUTEUR_FENETRE / 2) - 2*load->h;
+                        SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
+			if (compteur != 0){
+				texteMenu = TTF_RenderText_Blended(policeInfo,"Cliquez pour reprendre l'ancienne partie", couleurNoire);
+			}else{
+				texteMenu = TTF_RenderText_Blended(policeInfo,"Aucune sauvegarde existante !", couleurNoire);
+			}
+                        position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
+                        position.y = HAUTEUR_FENETRE - 200;
+                        SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
+                        SDL_Flip(screen);
                     }
         }      
 
@@ -113,9 +135,13 @@ int main(int argc, char *argv[])
         position.y = 50;
         SDL_BlitSurface(titre, NULL, screen, &position); /* Blit du titre */
         
-        position.x = (LARGEUR_FENETRE / 2) - (jouer->w / 2);
-        position.y = (HAUTEUR_FENETRE / 2) - 2*jouer->h;
-        SDL_BlitSurface(jouer, NULL, screen, &position); /* Blit de Jouer */
+        position.x = (LARGEUR_FENETRE / 2) - (new->w / 2);
+        position.y = (HAUTEUR_FENETRE / 2) - 2*new->h - 50;
+        SDL_BlitSurface(new, NULL, screen, &position); /* Blit de Nouvelle Partie */
+	
+        position.x = (LARGEUR_FENETRE / 2) - (load->w / 2);
+        position.y = (HAUTEUR_FENETRE / 2) - 2*load->h;
+        SDL_BlitSurface(load, NULL, screen, &position); /* Blit de Charger Partie */
         
         position.x = (LARGEUR_FENETRE / 2) - (options->w / 2);
         position.y += 50;
@@ -141,7 +167,7 @@ int main(int argc, char *argv[])
     Mix_CloseAudio();
     */
     SDL_FreeSurface(titre);
-    SDL_FreeSurface(jouer);
+    SDL_FreeSurface(new);
     SDL_FreeSurface(options);
     SDL_FreeSurface(credits);
     SDL_FreeSurface(highscore);

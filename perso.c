@@ -17,7 +17,7 @@ void RecupererVecteur(Input* in,int* vx,int* vy){
 			perso.x = respawnX;
 			perso.y = respawnY;
 		}
-		SDL_Delay(2000);
+		SDL_Delay(1000);
 	}
 }
 
@@ -37,7 +37,6 @@ void ViePerso(){
 	SDL_BlitSurface(vies,NULL,screen,&positionsurecran);
 	if (vie == 0){
 		gameover = 1;
-        compteur = 0;
 	}
 }
 
