@@ -25,8 +25,8 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	}
 	perso.x = respawnX;
 	perso.y = saveY = respawnY;
-	perso.w = 24;
-	perso.h = 32;
+	perso.w = 19;
+	perso.h = 30;
 	posblit.x = MARIO_WALK_R_X;
 	posblit.y = MARIO_WALK_Y;
 	posblit.w = MARIO_WIDTH;

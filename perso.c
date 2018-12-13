@@ -45,8 +45,7 @@ int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy){
 	test = *perso;
 	test.x+=vx;
 	test.y+=vy;
-	if (CollisionDecor(carte,&test)==0)
-	{
+	if (CollisionDecor(carte,&test)==0){
 		*perso = test;
 		return 1;
 	}

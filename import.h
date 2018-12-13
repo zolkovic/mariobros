@@ -10,7 +10,7 @@
 #define LARGEUR_FENETRE 800
 #define HAUTEUR_FENETRE 600
 #define GROUND 600
-#define VELOCITY 20 //7
+#define VELOCITY 10 //7
 #define VELOCITY_JUMP 12
 #define MARIO_HEIGHT 30
 #define MARIO_WIDTH 19
@@ -21,6 +21,8 @@
 #define MARIO_JUMP_L_X 497
 #define MARIO_JUMP_Y 35
 #define JUMP_HEIGHT 120
+#define SPAWN_X 30
+#define SPAWN_Y 535
 
 #define COLLISION_GAUCHE 1
 #define COLLISION_DROITE 2

@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
 				Options(&me);
 			compteur = 0;
 			monde = level = 1;
-			respawnX = 30;
-			respawnY = 535;
+			respawnX = 6000; 
+			respawnY = 200;
 			vie = 3;
 			playGame(me, monde, level, &compteur, vie, respawnX, respawnY);
 			event.button.x = 0;
