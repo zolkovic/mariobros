@@ -10,7 +10,7 @@
 #define LARGEUR_FENETRE 800
 #define HAUTEUR_FENETRE 600
 #define GROUND 600
-#define VELOCITY 7
+#define VELOCITY 20 //7
 #define VELOCITY_JUMP 12
 #define MARIO_HEIGHT 30
 #define MARIO_WIDTH 19
@@ -21,6 +21,11 @@
 #define MARIO_JUMP_L_X 497
 #define MARIO_JUMP_Y 35
 #define JUMP_HEIGHT 120
+
+#define COLLISION_GAUCHE 1
+#define COLLISION_DROITE 2
+#define COLLISION_HAUT 3
+#define COLLISION_BAS 4
 
 #define SGN(X) (((X)==0)?(0):(((X)<0)?(-1):(1)))
 #define ABS(X) ((((X)<0)?(-(X)):(X)))

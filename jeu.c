@@ -15,10 +15,14 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 			carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
 		//le reste des maps ici...
 	}
-	if (me==1)
-		mario = IMG_Load("./img/mario-3.png");
-	if (me==2)
-		mario = IMG_Load("./img/luigi-3.png");
+	switch (me){
+		case 1:
+			mario = IMG_Load("./img/mario-3.png");
+			break;
+		case 2:
+			mario = IMG_Load("./img/luigi-3.png");
+			break;
+	}
 	perso.x = respawnX;
 	perso.y = saveY = respawnY;
 	perso.w = 24;
@@ -46,7 +50,7 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 		FocusScrollCenter(carte,&perso);
 		AfficherMap(carte,screen);
 		AfficherPerso(&perso,screen,mario,carte->xscroll,carte->yscroll);
-		TableauDeBord(screen);
+		TableauDeBord(screen, me);
 		tempsActuel = SDL_GetTicks();
 		if (tempsActuel - tempsPrecedent >= 1000) /* Si 1000 ms au moins se sont écoulées */
 		{

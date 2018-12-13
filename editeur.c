@@ -141,19 +141,6 @@ int EditOnTileset(Context* C)
 	return 0;
 }
 
-void ProposeSave(Map* m,const char* fic)
-{
-#ifdef WIN32
-	int res = MessageBox(0,L"Sauver ?",L"Sauvegarder ?",MB_YESNO);
-	if (res==IDYES)
-		SauverMap(fic,m);
-#else
-	// option de confirmation desactivee pour autres systemes, sauver ave CTRL+S
-#endif
-}
-
-
-
 int Editeur(Context* C)
 {
 	while(!C->I.key[SDLK_ESCAPE] && !C->I.quit)
@@ -176,7 +163,6 @@ int Editeur(Context* C)
 		SDL_Flip(SDL_GetVideoSurface());
 		SDL_Delay(1);
 	}
-	ProposeSave(C->m,C->levelfic);
 	return 0;
 }
 
@@ -235,10 +221,6 @@ void getdirfrom(const char* fic)
 		if (buf[i]=='\\' || buf[i]=='/')
 		{
 			buf[i]='\0';
-#ifdef WIN32
-			//printf("chdir : %s\n",buf);
-			_chdir(buf);
-#endif
 			break;
 		}
 }

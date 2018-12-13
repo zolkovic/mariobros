@@ -56,6 +56,8 @@ void ChargerMap_tileset(FILE* F,Map* m){
 			m->props[numtile].mur = 0;
 			if (strcmp(buf2,"mur")==0)
 				m->props[numtile].mur = 1;
+			if (strcmp(buf2,"bloc")==0)
+				m->props[numtile].mur = 1;
 		}
 	}
 }
@@ -158,6 +160,7 @@ int CollisionDecor(Map* carte,SDL_Rect* perso){
 		for(j=ymin;j<=ymax;j++)
 		{
 			indicetile = carte->schema[i][j];
+			//printf("indicetile = %u\n",indicetile);
 			/*Collision avec un tile*/
 			if (carte->props[indicetile].mur){
 				/*Lorsque collision en dessous (Mario sur un sol)*/

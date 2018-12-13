@@ -69,14 +69,21 @@ void UpdateEvents(Input* in)
 	}
 }
 
-void TableauDeBord(SDL_Surface *screen){
+void TableauDeBord(SDL_Surface *screen, int me){
     char scor[10] = "";
 	postexte.x = 10;
 	postexte.y = 10;
 	TTF_Font *police = NULL;
 	SDL_Color couleurBlanche = {255, 255, 255};
 	police = TTF_OpenFont("./fonts/emulogic.ttf", 20);
-	texte = TTF_RenderText_Blended(police, "MARIO", couleurBlanche);
+	switch (me){
+	  case 1:
+		  texte = TTF_RenderText_Blended(police, "MARIO", couleurBlanche);
+		  break;
+	  case 2:
+		  texte = TTF_RenderText_Blended(police, "LUIGI", couleurBlanche);
+		  break;
+	}
 	SDL_BlitSurface(texte, NULL, screen, &postexte);
 	postexte.y = 30;
     sprintf(scor, "%05u", score); /* On écrit dans la chaîne "temps" le nouveau temps */

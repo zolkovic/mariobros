@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     SDL_Surface *titre, *new, *load, *options, *credits, *highscore, *fond, *texteMenu;
     SDL_Rect position;
     SDL_Event event;
-    TTF_Font *policeTitre = NULL, *policeMenu = NULL, *policeInfo = NULL;
+    TTF_Font *policeTitre, *policeMenu, *policeInfo;
     SDL_Color couleurNoire = {0, 0, 0}, couleurBlanche = {255, 255, 255}, couleurRouge = {255, 0, 0};
     int continuer = 1;
     
@@ -52,9 +52,11 @@ int main(int argc, char *argv[])
 			break;
 		}
             case SDL_MOUSEBUTTONDOWN:
-		  if(event.button.x >= 252  && event.button.x <= (252+new->w) && event.button.y >= 204 && event.button.y <= (204+new->h)){
+		if(event.button.x >= 252  && event.button.x <= (252+new->w) && event.button.y >= 204 && event.button.y <= (204+new->h)){
+			if (me !=1 && me != 2)
+				Options(&me);
 			compteur = 0;
-			me = monde = level = 1;
+			monde = level = 1;
 			respawnX = 30;
 			respawnY = 535;
 			vie = 3;
@@ -69,6 +71,8 @@ int main(int argc, char *argv[])
 		  } 
 		  else if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h)){
 			Options(&me);
+			event.button.x = 0;
+			event.button.y = 0;
 		  }
             case SDL_MOUSEMOTION:
                 if(event.motion.x >= 252  && event.motion.x <= (252+new->w) && event.motion.y >= 204 && event.motion.y <= (204+new->h))
@@ -81,7 +85,6 @@ int main(int argc, char *argv[])
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
-                        SDL_Flip(screen);
                     }
                 else if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h))
                     {
@@ -93,7 +96,6 @@ int main(int argc, char *argv[])
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
-                        SDL_Flip(screen);
                     }
                 else if(event.motion.x >= 330  && event.motion.x <= (330+credits->w) && event.motion.y >= 348 && event.motion.y <= (348+credits->h))
                     {
@@ -105,7 +107,6 @@ int main(int argc, char *argv[])
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
-                        SDL_Flip(screen);
                     }
                 else if(event.motion.x >= 262  && event.motion.x <= (262+load->w) && event.motion.y >= 253 && event.motion.y <= (253+load->h))
                     {
@@ -121,8 +122,8 @@ int main(int argc, char *argv[])
                         position.x = (LARGEUR_FENETRE / 2) - (texteMenu->w / 2);
                         position.y = HAUTEUR_FENETRE - 200;
                         SDL_BlitSurface(texteMenu, NULL, screen, &position); /* Blit du texte */ 
-                        SDL_Flip(screen);
                     }
+                    SDL_Flip(screen);
         }      
 
         
