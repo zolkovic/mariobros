@@ -1,0 +1,7 @@
+-fin, drapeau
+- ennemis	- màj du score
+- maps
+- sauvegarde via fichier texte (score, partie)
+- blocs
+- objets
+- musique
