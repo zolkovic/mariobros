@@ -16,7 +16,7 @@ SDL_Surface* read_highscore(SDL_Surface* highscore, TTF_Font* police,SDL_Color c
     fichier = fopen("highscore.txt", "r");
     fscanf(fichier, "%d", &highscore_int);
     fclose(fichier);
-    sprintf(highscore_string, "Highscore :\n %08u",highscore_int); /* On écrit dans la chaîne "temps" le nouveau temps */
+    sprintf(highscore_string, "%08u",highscore_int); /* On écrit dans la chaîne "temps" le nouveau temps */
     return TTF_RenderText_Blended(police,highscore_string, couleur);
 }
 

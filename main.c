@@ -58,9 +58,10 @@ int main(int argc, char *argv[])
 			if (me !=1 && me != 2)
 				Options(&me);
 			compteur = 300;
-			monde = level = 1;
-			respawnX = 6000; 
-			respawnY = 200;
+			monde = 1;
+            level = 1;
+			respawnX = SPAWN_X; //6000 SPAWN_X
+			respawnY = SPAWN_Y; //200 SPAWN_Y
 			vie = 3;
 			score = 0;
 			playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);

@@ -11,17 +11,38 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
 	switch (monde){
-	  case 1:
-		switch (level){
-		  case 1:
-		    carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
-		    break;
-		  case 2:
-		    carte = ChargerMap("level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
-		    break;
-		  //le reste des levels ici...
-		}
-		break;
+        case 1:
+            switch (level){
+                case 1:
+                    carte = ChargerMap("monde1level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 2:
+                    carte = ChargerMap("monde1level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 3:
+                    carte = ChargerMap("monde1level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 4:
+                    carte = ChargerMap("monde1level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+            }
+            break;
+        case 2:
+            switch(level){
+                case 1:
+                    carte = ChargerMap("monde2level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 2:
+                    carte = ChargerMap("monde2level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 3:
+                    carte = ChargerMap("monde2level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+                case 4:
+                    carte = ChargerMap("monde2level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    break;
+            }
+            break;              
 	}
 	switch (me){
 		case 1:
@@ -78,13 +99,15 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 		SDL_Flip(screen);
 	}
 	LibererMap(carte);
-	/*On vérifie si le jeu s'arrête car le jouer est mort où s'il a fini*/
+	/*On vérifie si le jeu s'arrête car le joueur est mort où s'il a fini*/
 	if (fin != 0){
 		if (level < NB_LEVELS){
 			level += 1;
 			fin = 0;
 			*compteur = 300;
 			playGame(me, monde, level, compteur, vie, SPAWN_X, SPAWN_Y, score);
+            SDL_Delay(2500);
+            gameover = 1;
 		}else{
 			if (monde < NB_MONDES){
 				monde += 1;
@@ -92,6 +115,8 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 				fin = 0;
 				*compteur = 300;
 				playGame(me, monde, level, compteur, vie, SPAWN_Y, SPAWN_X, score);
+                SDL_Delay(2500);
+                gameover = 1;
 			}else{
 				/*Le jouer a fini le jeu*/
 				
