@@ -31,14 +31,13 @@ int main(int argc, char *argv[])
     load = TTF_RenderText_Blended(policeMenu, "Charger partie", couleurNoire);
     options = TTF_RenderText_Blended(policeMenu, "Options", couleurNoire);
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
-    highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
     
     Mix_Chunk *son;
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(10);
     son = Mix_LoadWAV("./sons/hurry-up.wav");
     Mix_PlayChannel(1, son, 0);
-    
+    highscore = read_highscore(highscore, policeMenu, couleurBlanche);
     while (continuer)
     {
         SDL_PollEvent(&event);
@@ -46,10 +45,12 @@ int main(int argc, char *argv[])
         {
             case SDL_QUIT:
 		  continuer = 0;
+		  highscore = read_highscore(highscore, policeMenu, couleurBlanche);
 		  break;
 	    case SDL_KEYDOWN:
 		if (event.key.keysym.sym==SDLK_ESCAPE){
 			continuer = 0;
+			highscore = read_highscore(highscore, policeMenu, couleurBlanche);
 			break;
 		}
             case SDL_MOUSEBUTTONDOWN:
