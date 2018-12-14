@@ -170,6 +170,9 @@ void Evolue(Input* in,Map* carte,SDL_Rect* perso,int compteur){
 		if (posblit.x != 761){
 			posblit.x += MARIO_WIDTH + 2;
 		}
+		if (perso->x < (fin)*32-10){
+			perso->x += 1;
+		}
 	}
 }
 

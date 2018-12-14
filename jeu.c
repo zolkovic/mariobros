@@ -16,6 +16,9 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 		  case 1:
 		    carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
 		    break;
+		  case 2:
+		    carte = ChargerMap("level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+		    break;
 		  //le reste des levels ici...
 		}
 		break;
@@ -75,5 +78,24 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 		SDL_Flip(screen);
 	}
 	LibererMap(carte);
+	/*On vérifie si le jeu s'arrête car le jouer est mort où s'il a fini*/
+	if (fin != 0){
+		if (level < NB_LEVELS){
+			level += 1;
+			fin = 0;
+			*compteur = 300;
+			playGame(me, monde, level, compteur, vie, SPAWN_X, SPAWN_Y);
+		}else{
+			if (monde < NB_MONDES){
+				monde += 1;
+				level =1;
+				fin = 0;
+				//playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY);
+			}else{
+				/*Le jouer a fini le jeu*/
+				
+			}
+		}
+	}
 	return;
 }

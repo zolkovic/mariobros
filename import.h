@@ -24,6 +24,8 @@
 #define JUMP_HEIGHT 120
 #define SPAWN_X 30
 #define SPAWN_Y 535
+#define NB_LEVELS 5
+#define NB_MONDES 2
 
 #define COLLISION_GAUCHE 1
 #define COLLISION_DROITE 2
