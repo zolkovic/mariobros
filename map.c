@@ -1,4 +1,5 @@
 #include "import.h"
+#include "gestionFichier.c"
 
 typedef struct
 {
@@ -166,6 +167,7 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 				/*Défilement du drapeau à la fin*/
 				if (carte->schema[i+1][16] != 292){
 					score += (int)(GROUND-perso->y)/2 + compteur/20;
+					write_highscore(score);
 					perso->x = (i+1)*32 - MARIO_WIDTH;
 					/*Musique de fin du niveau*/
 					Mix_Chunk* fin;
