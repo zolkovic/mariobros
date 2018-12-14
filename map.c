@@ -167,10 +167,11 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 				if (carte->schema[i+1][16] != 292){
 					score += (int)(GROUND-perso->y)/2 + compteur/20;
 					perso->x = (i+1)*32 - MARIO_WIDTH;
-                    Mix_Music* m_fin;
-                    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
-                    m_fin = Mix_LoadMUS("./sons/niveau-termine.wav");
-                    Mix_PlayMusic(m_fin, 1);
+					/*Musique de fin du niveau*/
+					Mix_Chunk* fin;
+					Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+					fin = Mix_LoadWAV("./sons/niveau-termine.wav");
+					Mix_PlayChannel(3, fin, 0);
 					if (cmp == 4){
 						cmp = 0;
 						k = 8;
@@ -179,19 +180,25 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 						}
 						carte->schema[i+1][k] = carte->schema[i+1][k+1];
 						carte->schema[i+1][k+1] = 292;
-					}else{
-						cmp += 1;
 					}
+					cmp += 1;
 				}
 			}
-			else if (indicetile == 223 || indicetile == 224){
+			else if (indicetile == 223){
 				/*Arrivée à la porte de fin pour niveau suivant*/
-				if (cmp == 10){
-					cmp = 0;
-					perso->x = i*32 + l;
-					l += 1;
-				}
-				cmp += 1;
+				fin = i+1;
+				posblit.x = 383;
+				posblit.y = 204;
+				
+			}
+			else if (indicetile == 576 && j==ymin){
+				/*Lorsque Mario tape un bloc au-dessus de sa tête*/
+				//ici faire sortir un objet
+				carte->schema[i][j-1]= 253;
+				carte->schema[i][j]= 578;
+			}
+			else if (indicetile == 253){
+				/*ici on doit donner un pouvoir à Mario pour une certaine durée*/
 			}
 			/*Collision avec un tile*/
 			if (carte->props[indicetile].mur){

@@ -254,7 +254,7 @@ tile249: ciel
 tile250: ciel
 tile251: mur
 tile252: mur
-tile253: mur
+tile253: ciel
 tile254: mur
 tile255: mur
 tile256: mur
@@ -370,9 +370,9 @@ tile365: ciel
 tile366: ciel
 tile367: mur
 tile368: mur
-tile369: mur
+tile369: ciel
 tile370: mur
-tile371: mur
+tile371: ciel
 tile372: mur
 tile373: mur
 tile374: mur

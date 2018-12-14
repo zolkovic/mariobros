@@ -6,14 +6,19 @@
 void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY){
 	Map* carte;
 	Input in;
-	gameover = jump = left = right = move = fly = i = 0;	step = 1;	score = 00000;
+	gameover = jump = left = right = move = fly = i = fin = 0;	step = 1;	score = 00000;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
-	if (monde==1){
-		if (level==1)
-			carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
-		//le reste des maps ici...
+	switch (monde){
+	  case 1:
+		switch (level){
+		  case 1:
+		    carte = ChargerMap("level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+		    break;
+		  //le reste des levels ici...
+		}
+		break;
 	}
 	switch (me){
 		case 1:

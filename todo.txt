@@ -1,14 +1,17 @@
--fin, drapeau
-- ennemis	- màj du score
+à faire:
+-fin
+- ennemis
 - maps
-- sauvegarde via fichier texte (score, partie)
-- blocs
-- objets
+- sauvegarde via fichier texte:
+	      highscore
+	      dernier score
+	      dernier X et Y de mario
+	      vies
+	      monde
+	      level
+fait:
+-drapeau
 - musique
+- màj du score
+- des objets sortent des blocs mais pas encore de pouvoir
 
-highscore
-dernier score
-dernier X et Y de mario
-vies
-monde
-level

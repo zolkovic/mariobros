@@ -33,10 +33,11 @@ int main(int argc, char *argv[])
     credits = TTF_RenderText_Blended(policeMenu, "Credits", couleurNoire);
     highscore = TTF_RenderText_Blended(policeMenu, "Highscore 000000", couleurBlanche);
     
-    Mix_Music* musique;
+    Mix_Chunk *son;
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
-    musique = Mix_LoadMUS("./sons/hurry-up.wav");
-    Mix_PlayMusic(musique, 1);
+    Mix_AllocateChannels(10);
+    son = Mix_LoadWAV("./sons/hurry-up.wav");
+    Mix_PlayChannel(1, son, 0);
     
     while (continuer)
     {
@@ -164,7 +165,7 @@ int main(int argc, char *argv[])
     TTF_CloseFont(policeInfo);
     TTF_Quit();
     
-    Mix_FreeMusic(musique); 
+    Mix_FreeChunk(son); 
     Mix_CloseAudio();
     
     SDL_FreeSurface(titre);

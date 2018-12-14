@@ -36,7 +36,7 @@ void AfficherTemps(int*, int*);
 /*************Variables globales*************/
 int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i, compteur, monde, level, me;
 /*Variables dédiées au défilement de sprites*/
-int fly, jump, right, left, step, reset, move;
+int fly, jump, right, left, step, reset, move, fin;
 /**************Rectangles SDL****************/
 SDL_Rect perso, posblit, postexte;
 /***************Surfaces SDL*****************/
