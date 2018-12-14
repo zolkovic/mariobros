@@ -3,10 +3,10 @@
 #include "events.c"
 #include "perso.c"
 
-void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY){
+void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY, int *score){
 	Map* carte;
 	Input in;
-	gameover = jump = left = right = move = fly = i = fin = 0;	step = 1;	score = 00000;
+	gameover = jump = left = right = move = fly = i = fin = 0;	step = 1;
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
@@ -84,13 +84,14 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 			level += 1;
 			fin = 0;
 			*compteur = 300;
-			playGame(me, monde, level, compteur, vie, SPAWN_X, SPAWN_Y);
+			playGame(me, monde, level, compteur, vie, SPAWN_X, SPAWN_Y, score);
 		}else{
 			if (monde < NB_MONDES){
 				monde += 1;
 				level =1;
 				fin = 0;
-				//playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY);
+				*compteur = 300;
+				playGame(me, monde, level, compteur, vie, SPAWN_Y, SPAWN_X, score);
 			}else{
 				/*Le jouer a fini le jeu*/
 				

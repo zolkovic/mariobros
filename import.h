@@ -36,7 +36,7 @@
 #define ABS(X) ((((X)<0)?(-(X)):(X)))
 void AfficherTemps(int*, int*);
 /*************Variables globales*************/
-int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i, compteur, monde, level, me, highscore_int;;
+int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i, compteur, monde, level, me, highscore_int, score;
 /*Variables dédiées au défilement de sprites*/
 int fly, jump, right, left, step, reset, move, fin;
 /**************Rectangles SDL****************/

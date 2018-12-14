@@ -186,7 +186,7 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 					cmp += 1;
 				}
 			}
-			else if (indicetile == 223){
+			else if (indicetile == 223 && fin==0){
 				/*Arrivée à la porte de fin pour niveau suivant*/
 				fin = i+1;
 				posblit.x = 383;

@@ -62,12 +62,13 @@ int main(int argc, char *argv[])
 			respawnX = 6000; 
 			respawnY = 200;
 			vie = 3;
-			playGame(me, monde, level, &compteur, vie, respawnX, respawnY);
+			score = 0;
+			playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);
 			event.button.x = 0;
 			event.button.y = 0;
 		  } 
 		  else if(event.button.x >= 262  && event.button.x <= (262+load->w) && event.button.y >= 253 && event.button.y <= (253+load->h) && compteur != 0){
-			playGame(me, monde, level, &compteur, vie, respawnX, respawnY);
+			playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);
 			event.button.x = 0;
 			event.button.y = 0;
 		  } 
