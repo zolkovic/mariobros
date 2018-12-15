@@ -14,32 +14,32 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
         case 1:
             switch (level){
                 case 1:
-                    carte = ChargerMap("monde1level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde1level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 2:
-                    carte = ChargerMap("monde1level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde1level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 3:
-                    carte = ChargerMap("monde1level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde1level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 4:
-                    carte = ChargerMap("monde1level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde1level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
             }
             break;
         case 2:
             switch(level){
                 case 1:
-                    carte = ChargerMap("monde2level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde2level1.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 2:
-                    carte = ChargerMap("monde2level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde2level2.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 3:
-                    carte = ChargerMap("monde2level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde2level3.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
                 case 4:
-                    carte = ChargerMap("monde2level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
+                    carte = ChargerMap("./maps/monde2level4.txt",LARGEUR_FENETRE,HAUTEUR_FENETRE);
                     break;
             }
             break;              
