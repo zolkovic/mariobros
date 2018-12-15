@@ -22,7 +22,7 @@
 #define MARIO_JUMP_L_X 497
 #define MARIO_JUMP_Y 35
 #define JUMP_HEIGHT 128 //4 TILES
-#define SPAWN_X 30
+#define SPAWN_X 35
 #define SPAWN_Y 535
 #define NB_LEVELS 5
 #define NB_MONDES 2
