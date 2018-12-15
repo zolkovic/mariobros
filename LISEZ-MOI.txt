@@ -1,4 +1,45 @@
-Editeur Mario Bros
+/**********************************************************/
+/**                                                      **/
+/**              OIRAM BROS vO.2.1218                    **/
+/**   PROJET PERSONNEL DEDIE A LA PROGRAMMATION AVANCEE  **/
+/**         COPIE ET PUBLICATION INTERDITE               **/
+/**                                                      **/
+/**********************************************************/
+
+
+AU SUJET DU JEU:
+LIGNE DE COMPILATION :
+gcc -g -std=c99 main.c `sdl-config --cflags --libs` -I ./dll/include -L ./dll/lib -Wl,-rpath,./dll/lib -o main -lm -lSDL_mixer -lSDL_image -lSDL_ttf
+
+Placez-vous dans le répertoire principal mariobros et exécutez "./main"
+
+1. Le menu
+    3 choix possibles
+1.1. Nouvelle partie
+    Commencez une nouvelle partie de zéro au monde 1, niveau 1.
+1.2. Charger partie
+    Vous pouvez reprendre la dernière partie en cours (même si vous avez fermé le jeu depuis) mais uniquement la dernière.
+1.3. Options
+    Vous pouvez choisir le personnage que vous souhaitez utiliser pour jouer.
+    
+2. Le jeu
+2.1. Se déplacer
+    Utilisez les flèches gauche et droite pour vous déplacer ainsi que la barre Espace pour sauter.
+2.2. Blocs
+    Vous pouvez taper les blocs avec un point d'interrogation, vous pourrez obtenir dans 20% des cas une étoile qui vous rendra plus rapide et illuminant.
+    Ce pouvoir dure 15 secondes.
+    Dans les 80% restants, vous obtiendez des pièces pour le moment.
+2.3. Score
+    Le score évolue selon le temps que vous mettez à finir un niveau, selon le nombre de pièces récoltées et selon la hauteur à laquelle vous attrapez le drapeau.
+2.4. Vies
+    Faites attention à ne pas dépasser 5 minutes par niveau ou à ne pas perdre vos 3 vies pour ne pas perdre.
+    Lorsque vous tombez dans le vide, un conseil, ne touchez plus à rien et attendez votre respawn, sinon vous risquez de retomber assez rapidement. ;-)
+2.5. Fin
+    Pour finir un niveau, il faut se rendre à la porte du château.
+    Si jamais vous avez fini nos 2 mondes, et bien recommencez et essayez d'améliorer le highscore ! ;-)
+
+AU SUJET DE L'EDITEUR DE MAPS:
+Placez-vous dans le répertoire maps et exécutez en terminal "./editeur"
 
 1. Démarrage
   Deux options possibles, soit on commence une nouvelle carte, soit on édite une carte existante.
@@ -38,5 +79,3 @@ Editeur Mario Bros
    Utilisez la molette pour agrandir ou rétrécir le monde. Utilisez les touches H et V pour sélectionner un agrandissement horizontal ou vertical.
    Utilisez les flèches pour faire défiler la carte.
    Utilisez CTRL+S pour sauvergarder le travail.
-  
-
