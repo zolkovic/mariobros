@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 				Options(&me);
 			compteur = 300;
 			monde = 1;
-            level = 3;
+            level = 1;
 			respawnX = SPAWN_X; //6000 SPAWN_X
 			respawnY = SPAWN_Y; //200 SPAWN_Y
 			vie = 3;

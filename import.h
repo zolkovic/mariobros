@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
@@ -17,8 +18,14 @@
 #define MARIO_WIDTH 19
 #define MARIO_WALK_R_X 383
 #define MARIO_WALK_L_X 446
+#define MARIO_POWER_R_X 236
+#define MARIO_POWER_L_X 299
 #define MARIO_WALK_Y 77
 #define MARIO_JUMP_R_X 476
+#define MARIO_JUMP_POWER_DEBUT_R_X 215
+#define MARIO_JUMP_POWER_FIN_R_X 278
+#define MARIO_JUMP_POWER_DEBUT_L_X 299
+#define MARIO_JUMP_POWER_FIN_L_X 362
 #define MARIO_JUMP_L_X 497
 #define MARIO_JUMP_Y 35
 #define JUMP_HEIGHT 128 //4 TILES
@@ -38,7 +45,7 @@ void AfficherTemps(int*, int*);
 /*************Variables globales*************/
 int LARGEUR_TILE,HAUTEUR_TILE, gameover, saveY, vie, respawnX, respawnY, score, i, compteur, monde, level, me, highscore_int, score;
 /*Variables dédiées au défilement de sprites*/
-int fly, jump, right, left, step, reset, move, fin;
+int fly, jump, right, left, step, reset, move, fin, pouvoir, duree;
 /**************Rectangles SDL****************/
 SDL_Rect perso, posblit, postexte;
 /***************Surfaces SDL*****************/

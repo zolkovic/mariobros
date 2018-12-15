@@ -6,7 +6,8 @@
 void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX, int respawnY, int *score){
 	Map* carte;
 	Input in;
-	gameover = jump = left = right = move = fly = i = fin = 0;	step = 1;
+	gameover = jump = left = right = move = fly = i = fin = pouvoir = 0;	step = 1;
+    duree = 300; /*pas de pouvoir actif*/
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
@@ -106,8 +107,6 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 			fin = 0;
 			*compteur = 300;
 			playGame(me, monde, level, compteur, vie, SPAWN_X, SPAWN_Y, score);
-            SDL_Delay(2500);
-            gameover = 1;
 		}else{
 			if (monde < NB_MONDES){
 				monde += 1;
@@ -115,8 +114,6 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 				fin = 0;
 				*compteur = 300;
 				playGame(me, monde, level, compteur, vie, SPAWN_Y, SPAWN_X, score);
-                SDL_Delay(2500);
-                gameover = 1;
 			}else{
 				/*Le jouer a fini le jeu*/
 				

@@ -195,13 +195,24 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 			}
 			else if (indicetile == 576 && j==ymin){
 				/*Lorsque Mario tape un bloc au-dessus de sa tête*/
-				//ici faire sortir un objet
-				carte->schema[i][j-1]= 253;
 				carte->schema[i][j]= 578;
+                int alea = rand()%5;
+                if (alea == 0){
+                    carte->schema[i][j-1]= 575;
+                }else{
+                    carte->schema[i][j-1]= 605;
+                }
 			}
-			else if (indicetile == 253){
+			else if (indicetile == 575){
 				/*ici on doit donner un pouvoir à Mario pour une certaine durée*/
+                carte->schema[i][j]= 0;
+                pouvoir = 1;
+                duree = compteur - 15;
 			}
+			/*arrêt du pouvoir après 15s*/
+			if (pouvoir == 1 && compteur<=duree){
+                pouvoir = 0;
+            }
 			/*Collision avec un tile*/
 			if (carte->props[indicetile].mur){
 				/*Lorsque collision en dessous (Mario sur un sol)*/
