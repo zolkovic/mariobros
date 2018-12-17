@@ -212,6 +212,11 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur, int *pieces){
 				carte->schema[i][j]= 0;
 				pouvoir = 1;
 				duree = compteur - 15;
+				Mix_Chunk* star;
+				Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+				star = Mix_LoadWAV("./sons/star_sound.wav");
+				Mix_PlayChannel(8, star, 0);
+				Mix_Volume(8, MIX_MAX_VOLUME);
 			}
 			else if (indicetile == 605){
 				/*récolte des pièces*/
@@ -224,7 +229,8 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur, int *pieces){
 			}
 			/*arrêt du pouvoir après 15s*/
 			if (pouvoir == 1 && compteur<=duree){
-                pouvoir = 0;
+			      pouvoir = 0;
+			      Mix_Volume(8, 0);
             }
 			/*Collision avec un tile*/
 			if (carte->props[indicetile].mur){

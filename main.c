@@ -58,8 +58,8 @@ int main(int argc, char *argv[])
 			if (me !=1 && me != 2)
 				Options(&me);
 			compteur = 300;
-			monde = 1;
-            level = 1;
+			monde = 2;
+			level = 2;
 			respawnX = SPAWN_X; //6000 SPAWN_X
 			respawnY = SPAWN_Y; //200 SPAWN_Y
 			vie = 3;
@@ -68,10 +68,15 @@ int main(int argc, char *argv[])
 			event.button.x = 0;
 			event.button.y = 0;
 		  } 
-		  else if(event.button.x >= 262  && event.button.x <= (262+load->w) && event.button.y >= 253 && event.button.y <= (253+load->h) && compteur != 0){
-			playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);
-			event.button.x = 0;
-			event.button.y = 0;
+		  else if(event.button.x >= 262  && event.button.x <= (262+load->w) && event.button.y >= 253 && event.button.y <= (253+load->h)){
+			if (compteur != 0){
+				playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);
+				event.button.x = 0;
+				event.button.y = 0;
+			}else {
+				charger_sauvegarde(&score, &respawnX, &respawnY, &vie, &monde, &level, &compteur, &me);
+				playGame(me, monde, level, &compteur, vie, respawnX, respawnY, &score);
+			}
 		  } 
 		  else if(event.motion.x >= 330  && event.motion.x <= (330+options->w) && event.motion.y >= 298 && event.motion.y <= (298+options->h)){
 			Options(&me);

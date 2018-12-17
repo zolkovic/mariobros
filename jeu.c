@@ -123,6 +123,8 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 				Mix_PlayChannel(5, success, 0);
 			}
 		}
+	}else{
+		creer_sauvegarde(*score, perso.x, perso.y, vie, monde, level, *compteur, me);
 	}
 	return;
 }

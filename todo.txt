@@ -1,7 +1,5 @@
 à faire:
--fin
 - ennemis
-- maps
 - sauvegarde via fichier texte:
 	      highscore
 	      dernier score
@@ -14,4 +12,5 @@ fait:
 - musique
 - màj du score
 - des objets sortent des blocs mais pas encore de pouvoir
-
+- maps
+-fin
