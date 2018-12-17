@@ -226,6 +226,7 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur, int *pieces){
 				Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
 				bling = Mix_LoadWAV("./sons/piece.wav");
 				Mix_PlayChannel(4, bling, 0);
+				Mix_Volume(4, MIX_MAX_VOLUME/3);
 			}
 			/*arrêt du pouvoir après 15s*/
 			if (pouvoir == 1 && compteur<=duree){
