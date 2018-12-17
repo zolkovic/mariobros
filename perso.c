@@ -46,47 +46,51 @@ void ViePerso(){
 	SDL_BlitSurface(vies,NULL,screen,&positionsurecran);
 	if (vie == 0){
 		gameover = 1;
+		Mix_Chunk* end;
+		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+		end = Mix_LoadWAV("./sons/game-over.wav");
+		Mix_PlayChannel(6, end, 0);
 	}
 }
 
-int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy,int compteur){
+int EssaiDeplacement(Map* carte,SDL_Rect* perso,int vx,int vy,int compteur,int *pieces){
 	SDL_Rect test;
 	test = *perso;
 	test.x+=vx;
 	test.y+=vy;
-	if (CollisionDecor(carte,&test,compteur)==0){
+	if (CollisionDecor(carte,&test,compteur,pieces)==0){
 		*perso = test;
 		return 1;
 	}
 	return 0;
 }
 
-void Deplace(Map* carte,SDL_Rect* perso,int vx,int vy, int compteur){
+void Deplace(Map* carte,SDL_Rect* perso,int vx,int vy, int compteur,int *pieces){
 	int i;
 	if (vx>=LARGEUR_TILE || vy>=HAUTEUR_TILE)
 	{
-		Deplace(carte,perso,vx/2,vy/2,compteur);
-		Deplace(carte,perso,vx-vx/2,vy-vy/2,compteur);
+		Deplace(carte,perso,vx/2,vy/2,compteur,pieces);
+		Deplace(carte,perso,vx-vx/2,vy-vy/2,compteur,pieces);
 		return;
 	}
-	if (EssaiDeplacement(carte,perso,vx,vy,compteur)==1)
+	if (EssaiDeplacement(carte,perso,vx,vy,compteur,pieces)==1)
 		return;
 	for(i=0;i<ABS(vx);i++)
 	{
-		if (EssaiDeplacement(carte,perso,SGN(vx),0,compteur)==0)
+		if (EssaiDeplacement(carte,perso,SGN(vx),0,compteur,pieces)==0)
 			break;
 	}
 	for(i=0;i<ABS(vy);i++)
 	{
-		if (EssaiDeplacement(carte,perso,0,SGN(vy),compteur)==0)
+		if (EssaiDeplacement(carte,perso,0,SGN(vy),compteur,pieces)==0)
 			break;			
 	}
 }
 
-void Evolue(Input* in,Map* carte,SDL_Rect* perso,int compteur){
+void Evolue(Input* in,Map* carte,SDL_Rect* perso,int compteur,int *pieces){
 	int vx,vy;
 	RecupererVecteur(in,&vx,&vy);
-	Deplace(carte,perso,vx,vy, compteur);
+	Deplace(carte,perso,vx,vy, compteur,pieces);
 	SDL_Delay(30);
 	/*Sauvegarde de la position Y au cas où Mario veuille sauter*/
 	if (fin==0){

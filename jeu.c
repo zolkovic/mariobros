@@ -7,7 +7,8 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	Map* carte;
 	Input in;
 	gameover = jump = left = right = move = fly = i = fin = pouvoir = 0;	step = 1;
-    duree = 300; /*pas de pouvoir actif*/
+	int pieces = 0;
+	duree = 300; /*pas de pouvoir actif*/
 	LARGEUR_TILE = 24;
 	HAUTEUR_TILE = 16;
 	memset(&in,0,sizeof(in));
@@ -76,7 +77,7 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 	while(!gameover)
 	{
 		UpdateEvents(&in);
-		Evolue(&in,carte,&perso, *compteur);
+		Evolue(&in,carte,&perso, *compteur, &pieces);
 		FocusScrollCenter(carte,&perso);
 		AfficherMap(carte,screen);
 		AfficherPerso(&perso,screen,mario,carte->xscroll,carte->yscroll);
@@ -116,7 +117,10 @@ void playGame(int me, int monde, int level, int *compteur, int vie, int respawnX
 				playGame(me, monde, level, compteur, vie, SPAWN_Y, SPAWN_X, score);
 			}else{
 				/*Le jouer a fini le jeu*/
-				
+				Mix_Chunk* success;
+				Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+				success = Mix_LoadWAV("./sons/smb_world_clear.wav");
+				Mix_PlayChannel(5, success, 0);
 			}
 		}
 	}

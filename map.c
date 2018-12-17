@@ -147,7 +147,7 @@ int LibererMap(Map* m){
 	return 0;
 }
 
-int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
+int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur, int *pieces){
 	int xmin,xmax,ymin,ymax,i,j,indicetile, k;
 	static int cmp = 0;
 	static int l = 0;
@@ -195,19 +195,32 @@ int CollisionDecor(Map* carte,SDL_Rect* perso, int compteur){
 			}
 			else if (indicetile == 576 && j==ymin){
 				/*Lorsque Mario tape un bloc au-dessus de sa tête*/
+				Mix_Chunk* bloc;
+				Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+				bloc = Mix_LoadWAV("./sons/smb_breakblock.wav");
+				Mix_PlayChannel(7, bloc, 0);
 				carte->schema[i][j]= 578;
-                int alea = rand()%5;
-                if (alea == 0){
-                    carte->schema[i][j-1]= 575;
-                }else{
-                    carte->schema[i][j-1]= 605;
-                }
+				int alea = rand()%5;
+				if (alea == 0){
+				    carte->schema[i][j-1]= 575;
+				}else{
+				    carte->schema[i][j-1]= 605;
+				}
 			}
 			else if (indicetile == 575){
 				/*ici on doit donner un pouvoir à Mario pour une certaine durée*/
-                carte->schema[i][j]= 0;
-                pouvoir = 1;
-                duree = compteur - 15;
+				carte->schema[i][j]= 0;
+				pouvoir = 1;
+				duree = compteur - 15;
+			}
+			else if (indicetile == 605){
+				/*récolte des pièces*/
+				*pieces += 1;
+				carte->schema[i][j] = 0;
+				Mix_Chunk* bling;
+				Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+				bling = Mix_LoadWAV("./sons/piece.wav");
+				Mix_PlayChannel(4, bling, 0);
 			}
 			/*arrêt du pouvoir après 15s*/
 			if (pouvoir == 1 && compteur<=duree){

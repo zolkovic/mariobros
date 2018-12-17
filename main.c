@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     Mix_Chunk *son;
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_AllocateChannels(10);
-    son = Mix_LoadWAV("./sons/hurry-up.wav");
+    son = Mix_LoadWAV("./sons/super_mario_bros_song.wav");
     Mix_PlayChannel(1, son, 0);
     highscore = read_highscore(highscore, policeMenu, couleurBlanche);
     while (continuer)
