@@ -58,8 +58,8 @@ int main(int argc, char *argv[])
 			if (me !=1 && me != 2)
 				Options(&me);
 			compteur = 300;
-			monde = 2;
-			level = 2;
+			monde = 1;
+			level = 1;
 			respawnX = SPAWN_X; //6000 SPAWN_X
 			respawnY = SPAWN_Y; //200 SPAWN_Y
 			vie = 3;
